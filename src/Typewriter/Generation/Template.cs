@@ -94,8 +94,13 @@ namespace Typewriter.Generation
 
         public ICollection<string> GetFilesToRender()
         {
-            var projects = _projectItem.DTE.Solution.AllProjects().Where(m => _configuration.Value.IncludedProjects.Any(p => m.FullName.Equals(p, StringComparison.OrdinalIgnoreCase)));
-            return projects.SelectMany(m => m.AllProjectItems(Constants.CsExtension)).Select(m => m.Path()).ToList();
+            return _projectItem.DTE.Solution
+                .AllProjects()
+                .Where(m => _configuration.Value.IncludedProjects.Any(p => m.FullName.Equals(p, StringComparison.OrdinalIgnoreCase)))
+                .SelectMany(m => m.AllProjectItems(Constants.CsExtension))
+                .Select(m => m.Path())
+                .Where(p => _configuration.Value.FilesToRenderFilter(p))
+                .ToList();
         }
 
         public bool ShouldRenderFile(string filename)

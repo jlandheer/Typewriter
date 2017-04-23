@@ -114,7 +114,7 @@ namespace Typewriter.VisualStudio
             try
             {
                 var version = GetVisualStudioVersion();
-                Log.Debug($"Visual Studio Version: {version}");
+                Log.Info($"Visual Studio Version: {version}");
 
                 if (version.Major >= 14 || version.Major == 0)
                 {
@@ -122,7 +122,7 @@ namespace Typewriter.VisualStudio
                     var type = assembly.GetType("Typewriter.Metadata.Roslyn.RoslynMetadataProvider");
                     var provider = (IMetadataProvider) Activator.CreateInstance(type);
 
-                    Log.Debug("Using Roslyn");
+                    Log.Info("Using Roslyn");
                     Constants.RoslynEnabled = true;
                     this.metadataProvider = provider;
 
@@ -134,7 +134,7 @@ namespace Typewriter.VisualStudio
                 Log.Debug(exception.Message);
             }
 
-            Log.Debug("Using CodeDom");
+            Log.Info("Using CodeDom");
             this.metadataProvider = new CodeDomMetadataProvider(this.dte);
         }
 

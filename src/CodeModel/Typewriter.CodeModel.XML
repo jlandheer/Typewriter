@@ -1207,6 +1207,13 @@
             
             </summary>
         </member>
+        <member name="P:Typewriter.Configuration.Settings.FilesToRenderFilter">
+            <summary>
+            Determines of this file should be rendered, in large projects this might speed things up.
+            The factory is called for each file to determine if it should be rendered.
+            Example: file => file.Contains("\\Models\\");
+            </summary>
+        </member>
         <member name="T:Typewriter.Extensions.Types.TypeExtensions">
             <summary>
             Extension methods for working with types.

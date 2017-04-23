@@ -45,5 +45,12 @@ namespace Typewriter.Configuration
         /// 
         /// </summary>
         public PartialRenderingMode PartialRenderingMode { get; set; } = PartialRenderingMode.Partial;
+
+        /// <summary>
+        /// Determines of this file should be rendered, in large projects this might speed things up.
+        /// The factory is called for each file to determine if it should be rendered.
+        /// Example: path => path.Contains("\\Models\\");
+        /// </summary>
+        public Func<string, bool> FilesToRenderFilter { get; set; } = path => true;
     }
 }
